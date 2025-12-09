@@ -1,20 +1,15 @@
-import { globalIgnores } from 'eslint/config'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
-import pluginVue from 'eslint-plugin-vue'
+import antfu from '@antfu/eslint-config'
 
-// To allow more languages other than `ts` in `.vue` files, uncomment the following lines:
-// import { configureVueProject } from '@vue/eslint-config-typescript'
-// configureVueProject({ scriptLangs: ['ts', 'tsx'] })
-// More info at https://github.com/vuejs/eslint-config-typescript/#advanced-setup
-
-export default defineConfigWithVueTs(
-  {
-    name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+export default antfu({
+  vue: {
+    overrides: {
+      'vue/multi-word-component-names': 'off',
+    },
   },
-
-  globalIgnores(['**/dist/**', '**/dist-ssr/**', '**/coverage/**']),
-
-  pluginVue.configs['flat/essential'],
-  vueTsConfigs.recommended,
-)
+  ignores: [
+    '**/dist/**',
+    '**/node_modules/**',
+    '**/*.md',
+    'tsconfig.json',
+  ],
+})
